@@ -11,3 +11,28 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.moveArrow {
+  animation-name : mymove;
+  animation-iteration-count : infinite;
+  animation-direction : alternate;
+  animation-duration : 1s;
+  animation-timing-function: linear;
+}
+
+@keyframes mymove {
+  from {transform: translateY(15px);}
+  to {transform: translateY(30px);}
+}
+
+.line{
+  display:flex;
+  justify-content:center;
+  border-bottom:1px solid black;
+  width:60%;
+  margin-left:20%;
+}
+
+dt{
+  font-weight: none;
+}
