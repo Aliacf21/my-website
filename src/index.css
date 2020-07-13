@@ -26,13 +26,18 @@ code {
 }
 
 .line{
-  display:flex;
-  justify-content:center;
+  line-height:2;
   border-bottom:1px solid black;
   width:60%;
   margin-left:20%;
+  margin-bottom: 1%;
 }
 
 dt{
   font-weight: none;
+}
+
+.cards{
+  margin-left: 19%;
+  margin-right:19%;
 }

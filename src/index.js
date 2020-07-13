@@ -5,10 +5,166 @@ import Typist from "react-typist";
 import './index.css';
 import arrow from "./imgs/arrow.png";
 import prof_pic from "./imgs/profile_pic.jpg";
-import { Row, Col, Container, Image, Tabs, Tab, Button} from "react-bootstrap";
-import Card from "react-bootstrap/Card";
-import Nav from "react-bootstrap/Nav";
+import leadership from "./imgs/leadership.jpg";
+import {Row, Col, Container, Image, Tabs, Tab, Button, Card, CardDeck, ListGroup} from "react-bootstrap";
+import { makeStyles } from '@material-ui/core/styles';
+import Accordion from '@material-ui/core/Accordion';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import Typography from '@material-ui/core/Typography';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
+function Acc(props){
+	console.log(props.d)
+	var useStyles = makeStyles((theme) => ({
+		root: {
+		  width: '100%',
+		},
+		heading: {
+		  fontSize: theme.typography.pxToRem(15),
+		  fontWeight: theme.typography.fontWeightRegular,
+		},
+	  }));
+	var classes = useStyles();
+	var final = [];
+	for (let title of Object.keys(props.d)){
+		var temp = [];
+		for (let inner of props.d[title]){
+			temp.push(<li>{inner}</li>);
+		}
+		final.push(
+			<Accordion>
+			<AccordionSummary
+			expandIcon={<ExpandMoreIcon />}
+			aria-controls="panel1a-content"
+			id="panel1a-header"
+			>
+			<Typography className={classes.heading}>{title} </Typography>
+			</AccordionSummary>
+			<AccordionDetails>
+			<Typography>
+				<ul>{temp}</ul>
+			</Typography>
+			</AccordionDetails>
+			</Accordion>)
+	}
+
+	return (<div className={classes.root}>{final}</div>)
+
+}
+
+function Experiences() {
+	var d1 = {"Lead TA for 15-112: Fundamentals of Programming": 
+	["I dealt with grading issues including rubrics and regrade requests.", 
+	"I made sure course events were staffed and ran smoothly.",
+	"I oversaw a staff of 15 people and held weekly course meetings."],
+	"Orientation Counselor": 
+	["I eased the college transition for incoming students, making sure they felt comfortable.",
+	"I was available for all incoming freshman and completed training to handle any questions (even those related to difficult topics such as sex and alcohol).",
+	"I facilitated many icebreakers and helped form bonds between the first years."]};
+
+	var d2 = {"Full Stack Developer for ExamOptimum":
+			["I helped optimize scheduling by reducing exam date conflicts based on student enrollment.",
+			"This application is developed in Python using a Flask framework and SQL-Lite to communicate with servers.",
+			"This application is widely used within the Mellon College of Science and is expanding its user base."],
+			"Teaching Assistant for 15-112: Fundamentals of Programming":
+			["I was a competitively chosen TA for an introductory coding class taught in Python.",
+			"Responsibilities included teaching a weekly recitation of ~31 students, two one-hour review sessions a week, and weekly office hours.",
+			"It was my duty to monitor struggling students and reach out to them for extra help if needed."]}
+
+	var d3 = {"Computer Human Interaction: Mobile Privacy Security Lab — Dr. Jason Hong (CMU)":
+			["I tested various machine learning models for the purpose of image captioning.",
+			"I ran a user study on Amazon MTurk to find common errors in captioning and analyzed and parsed the resulting data.",
+			"I integrated the results into an online platform to enable researchers to identify common model mistakes."],
+			'Intersection Between Estimation and Optimization" ― Dr. G\u00E9rard Cornu\u00E9jols (CMU)':
+			["I focused on whether certain estimators of general data were admissible, including the MLE and James Stein Shrinkage estimator.",
+			"I tested various loss functions and assumptions on the distribution of data to see the differing results."]
+		}
+	return(
+		<div id="experiences" style={{width:"100%", height:"100%", background:"#eae7dc"}}>
+			<br/>
+			<div class="line">
+				<Text style={{textAlign:"center", width: "100%", display: "inline-block",
+					fontSize:"5vw", whiteSpace:"pre", color:"#00887A"}}> Experiences </Text>
+			</div>
+			<div style={{marginBottom: "2%"}}>
+			<CardDeck class="card-deck cards">
+				<Card>
+					<Card.Body>
+					<Card.Title>Leadership Experience</Card.Title>
+					<Card.Text>
+						<Acc d={d1}/>
+					</Card.Text>
+					</Card.Body>
+					<Card.Footer>
+					<small className="text-muted">"It’s only after you’ve stepped outside your comfort zone that you begin to change, grow, and transform."
+― Roy T. Bennett</small>
+					</Card.Footer>
+				</Card>
+				<Card>
+					<Card.Body>
+					<Card.Title>Developer and Coding Experience</Card.Title>
+					<Card.Text>
+						<Acc d={d2}/>
+					</Card.Text>
+					</Card.Body>
+					<Card.Footer>
+					<small className="text-muted">"Talk is cheap. Show me the code."
+― Linus Torvalds </small>
+					</Card.Footer>
+				</Card>
+				{/*<Card>
+					<Card.Body>
+					<Card.Title>Research Experience</Card.Title>
+					<Card.Text>
+						<Acc d={d3} />
+					</Card.Text>
+					</Card.Body>
+					<Card.Footer>
+					<small className="text-muted">"All I'm armed with is research." ― Mike Wallace </small>
+					</Card.Footer>
+				</Card>*/}
+			</CardDeck>
+			<Card style={{display: "table", marginLeft: "20%", marginRight:"20%", marginTop: "2%"}}>
+				<Card.Body>
+				<Card.Title>Research Experience</Card.Title>
+				<Card.Text>
+					<Acc d={d3} />
+				</Card.Text>
+				</Card.Body>
+				<Card.Footer>
+				<small className="text-muted">"All I'm armed with is research." ― Mike Wallace </small>
+				</Card.Footer>
+			</Card>
+			</div>
+			<div style={{paddingBottom:"5%"}}>
+			<Card style={{marginLeft: "20%", marginRight:"20%"}}>
+				<Card.Body>
+				<Card.Title>Selected Coursework</Card.Title>
+				<ListGroup >
+					<ListGroup horizontal > 
+						<ListGroup.Item>Introduction to Machine Learning (Python)</ListGroup.Item>
+						<ListGroup.Item>Introduction to Artificial Intelligence (Python)</ListGroup.Item>
+						<ListGroup.Item>Natural Language Processing (Python)</ListGroup.Item>
+					</ListGroup>
+					<ListGroup horizontal > 
+						<ListGroup.Item> Intro to Systems Programming (C) </ListGroup.Item>
+						<ListGroup.Item> Parallel/Sequential Data Structures/Algorithms (SML) </ListGroup.Item>
+						<ListGroup.Item> Functional Programming (SML) </ListGroup.Item>
+					</ListGroup>
+					<ListGroup horizontal > 
+						<ListGroup.Item> Advanced Methods for Data Analysis (R) </ListGroup.Item>
+						<ListGroup.Item> Linear Algebra </ListGroup.Item>
+						<ListGroup.Item> Discrete Math </ListGroup.Item>
+						<ListGroup.Item> Differential Equations </ListGroup.Item>
+					</ListGroup>
+				</ListGroup>
+				</Card.Body>
+			</Card>
+			</div>
+		</div>
+		)
+}
 
 
 class Profile extends Component{
@@ -16,11 +172,14 @@ class Profile extends Component{
 	paragraph2 = "This website is designed to be an interactice personal resume to showcase my skills and also as a learning project to get some experience with web development using React. Please feel free to leave any comments at the bottom!"
 	render (){ 
 		return (
-		<div id="profile" style={{width:"100%", height:"100%", background:"#f2f2f2"}}>
-			<br/><br/>
+		<div id="profile" style={{width:"100%", height:"100%", background:"#f2f2f2", paddingBottom:"10%"}}>
+			<br/>
 			<div class="line">
-				<Text style={{textAlign:"center", 
+				<Text style={{textAlign:"center", width: "100%", display: "inline-block",
 					fontSize:"5vw", whiteSpace:"pre", color:"#00887A"}}> Profile </Text>
+					<br/>
+				<Text style={{textAlign:"center", width: "100%", display: "inline-block",
+					fontSize:"2vw", whiteSpace:"pre", color:"#00887A"}}> Full Time Student, Big Data Enthusiast </Text>
 			</div>
 			<br/>
 			<Container>
@@ -45,16 +204,14 @@ class Profile extends Component{
 									<dd>Pittsburgh, PA</dd>
 								</dl>
 							</Tab>
-							<Tab eventKey="bio" title="Brief Bio" style={{marginLeft:"5px"}}>
-								<Text>{this.paragraph1}</Text><br/><br/>
-								<Text>{this.paragraph2}</Text>
+							<Tab eventKey="bio" title="Brief Bio" style={{marginLeft:"5px", lineHeight:"1.5"}}>
+								<Text style={{fontSize: "1rem"}}>{this.paragraph1}</Text><br/><br/>
+								<Text style={{fontSize: "1rem"}}>{this.paragraph2}</Text>
 							</Tab>
 						</Tabs>
 					</Col>
 				</Row>
 			</Container>
-			<br/>
-			<br/>
 		</div>
 		
 	)}
@@ -88,7 +245,7 @@ function HomeScreen() {
 							}}> AJ Druck </span>
 			</Typist>
 
-			<div style={{position: 'absolute', bottom:"0%", left: "85%",
+			<div style={{position: 'absolute', bottom:"0%", left: "87%",
 						 backgroundColor:"black", width:"8%", height:"15%",
 						 display:"flex", justifyContent:"center"}}
 						 onClick={handleImageClick}>
@@ -105,6 +262,7 @@ class App extends Component{
 		<div>
 			<HomeScreen />
 			<Profile />
+			<Experiences />
 		</div>)
 	}
 
