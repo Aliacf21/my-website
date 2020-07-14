@@ -13,6 +13,7 @@
     "react-art": "^16.13.1",
     "react-bootstrap": "^1.2.1",
     "react-dom": "^16.13.1",
+    "react-google-charts": "^3.0.15",
     "react-native": "^0.62.2",
     "react-native-web": "^0.13.3",
     "react-router-dom": "^5.2.0",

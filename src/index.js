@@ -5,7 +5,6 @@ import Typist from "react-typist";
 import './index.css';
 import arrow from "./imgs/arrow.png";
 import prof_pic from "./imgs/profile_pic.jpg";
-import leadership from "./imgs/leadership.jpg";
 import {Row, Col, Container, Image, Tabs, Tab, Button, Card, CardDeck, ListGroup} from "react-bootstrap";
 import { makeStyles } from '@material-ui/core/styles';
 import Accordion from '@material-ui/core/Accordion';
@@ -13,9 +12,121 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+var CanvasJSReact = require('./canvasjs.react');
+
+var CanvasJS = CanvasJSReact.default.CanvasJS;
+var CanvasJSChart = CanvasJSReact.default.CanvasJSChart;
+
+
+class Skills extends Component{
+	render() {
+		const options1 = {
+			animationEnabled: true,
+			theme: "light2",
+			axisX: {
+				title: "Programming Language",
+				reversed: true,
+			},
+			axisY: {
+				title: "Comfortability (%)",
+				labelFormatter: this.addSymbols,
+				maximum: 100,
+				interval: 10
+			},
+			data: [{
+				type: "bar",
+				dataPoints: [
+					{ y:  100, label: "Python" },
+					{ y:  80, label: "C" },
+					{ y:  80, label: "R" },
+					{ y:  70, label: "SML" },
+					{ y: 70, label: "Latex"},
+					{ y:  30, label: "Go" },
+					{ y: 30, label: "Java"}
+				]
+			}]
+		}
+		const options2 = {
+			animationEnabled: true,
+			theme: "light2",
+			axisX: {
+				title: "Tools and Frameworks",
+				reversed: true,
+			},
+			axisY: {
+				title: "Comfortability (%)",
+				maximum: 100,
+				interval: 10
+			},
+			data: [{
+				type: "bar",
+				dataPoints: [
+					{ y: 80, label: "Microsoft Office"},
+					{ y: 60, label: "Flask" },
+					{ y:  55, label: "HTML/CSS" },
+					{ y:  55, label: "React" },
+					{ y: 50, label: "Bootstrap"},
+					{ y: 40, label: "Git Version Control"}
+				]
+			}]
+		}
+		const options3 = {
+			animationEnabled: true,
+			theme: "light2",
+			axisX: {
+				title: "Languages",
+				reversed: true,
+			},
+			axisY: {
+				title: "Comfortability (%)",
+				maximum: 100,
+				interval: 10
+			},
+			data: [{
+				type: "bar",
+				dataPoints: [
+					{ y: 100, label: "English"},
+					{ y: 80, label: "Hebrew" },
+					{ y:  30, label: "Spanish"}
+				]
+			}]
+		}
+		return (
+		<div id="Skills" style={{width:"100%", height:"100%", background:"#f2f2f2"}}>
+			<br/>
+			<div class="line">
+				<Text style={{textAlign:"center", width: "100%", display: "inline-block",
+					fontSize:"5vw", whiteSpace:"pre", color:"#00887A"}}> Skills </Text>
+			</div>
+			<div style={{marginBottom: "2%"}}></div>
+			<div style={{marginLeft: "20%", marginRight:"20%"}}>
+				<Tabs defaultActiveKey="pl" mountOnEnter="true" unmountOnExit="false">
+					<Tab eventKey="pl" title="Programming Languages">
+						<div id="graph-container">
+							<CanvasJSChart options = {options1} 
+							/* onRef={ref => this.chart = ref} *//>
+						</div>
+					</Tab>
+					<Tab eventKey="tools" title="Other Tools and Frameworks">
+						<div id="graph-container" style={{width:"100%"}}>
+							<CanvasJSChart options = {options2} 
+							/* onRef={ref => this.chart = ref} *//>
+						</div>
+					</Tab>
+					<Tab eventKey="l" title="Languages">
+						<div id="graph-container" style={{width:"100%"}}>
+							<CanvasJSChart options = {options3} 
+							/* onRef={ref => this.chart = ref} *//>
+						</div>
+					</Tab>
+				</Tabs>
+			</div>
+		</div>
+		);
+	}
+}
 
 function Acc(props){
-	console.log(props.d)
 	var useStyles = makeStyles((theme) => ({
 		root: {
 		  width: '100%',
@@ -189,7 +300,7 @@ class Profile extends Component{
 							 roundedCircle/>
 					</Col>
 					<Col md={{span: 5, offset:0}} style={{marginLeft:"55px", paddingLeft:"0px", paddingRight:"0px"}}>
-						<Tabs defaultActiveKey="facts" id="uncontrolled-tab-example">
+						<Tabs defaultActiveKey="facts">
 							<Tab eventKey="facts" title="Fast Facts" style={{marginLeft:"5px"}}>
 								<dl>
 									<dt>Full Name</dt>
@@ -263,6 +374,7 @@ class App extends Component{
 			<HomeScreen />
 			<Profile />
 			<Experiences />
+			<Skills />
 		</div>)
 	}
 
