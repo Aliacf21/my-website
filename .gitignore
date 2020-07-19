@@ -24,4 +24,3 @@ yarn-error.log*
 /.blackbox/pubring.gpg~
 /.blackbox/pubring.kbx~
 /.blackbox/secring.gpg
-/src/config.json
