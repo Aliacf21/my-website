@@ -18,6 +18,7 @@ import fb from "./imgs/f.png";
 import github from "./imgs/github.png"
 import A from "./imgs/A copy.png"
 import config from "./config.json"
+var CryptoJS = require("crypto-js");
 var CanvasJSReact = require('./canvasjs.react');
 var CanvasJS = CanvasJSReact.default.CanvasJS;
 var CanvasJSChart = CanvasJSReact.default.CanvasJSChart;
@@ -54,13 +55,16 @@ class Contact extends Component{
 		super(props);
 		this.state = {postWork:null};
 	}
-	url = config.slackhook;
+	
 	email = (e) => {
+		var bytes = CryptoJS.AES.decrypt("U2FsdGVkX19xjwN83thdsxC7+TiXm98nlAP5QGgZ7VZfeAyE5ZLt2VsNvt30+nDI+zO9FEh4ANfq8WgFARu+6K9SqideoaB9FLYMdf1a1KAsOWn9fZPSzRmOS7Q0EF2avP5GE2Bf/FSNDuQzcacdmg==", config.password)
+		var url = bytes.toString(CryptoJS.enc.Utf8);
+
 		e.preventDefault();
 		var from = "Message from " + this.refs.email.value + ":\n"
 		var message = this.refs.comment.value;
 		var formatted = '{"text":"' + from + message + '"}';
-		fetch(this.url, {
+		fetch(url, {
 			method: "POST",
 			body:formatted
 		}).then(response => {
