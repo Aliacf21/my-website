@@ -1,23 +1,26 @@
 {
   "files": {
-    "main.css": "/my-website/static/css/main.7ebe1d0c.chunk.css",
-    "main.js": "/my-website/static/js/main.b2400340.chunk.js",
-    "main.js.map": "/my-website/static/js/main.b2400340.chunk.js.map",
+    "main.css": "/my-website/static/css/main.5103b37b.chunk.css",
+    "main.js": "/my-website/static/js/main.c7258c2a.chunk.js",
+    "main.js.map": "/my-website/static/js/main.c7258c2a.chunk.js.map",
     "runtime-main.js": "/my-website/static/js/runtime-main.0cbcd75a.js",
     "runtime-main.js.map": "/my-website/static/js/runtime-main.0cbcd75a.js.map",
-    "static/js/2.aa2ecd38.chunk.js": "/my-website/static/js/2.aa2ecd38.chunk.js",
-    "static/js/2.aa2ecd38.chunk.js.map": "/my-website/static/js/2.aa2ecd38.chunk.js.map",
+    "static/js/2.1fadc1cc.chunk.js": "/my-website/static/js/2.1fadc1cc.chunk.js",
+    "static/js/2.1fadc1cc.chunk.js.map": "/my-website/static/js/2.1fadc1cc.chunk.js.map",
     "index.html": "/my-website/index.html",
-    "precache-manifest.68b653e8e34ce1b01baf19b09333e8be.js": "/my-website/precache-manifest.68b653e8e34ce1b01baf19b09333e8be.js",
+    "precache-manifest.b370b4b62d1af2afc5b5d900128d1064.js": "/my-website/precache-manifest.b370b4b62d1af2afc5b5d900128d1064.js",
     "service-worker.js": "/my-website/service-worker.js",
-    "static/css/main.7ebe1d0c.chunk.css.map": "/my-website/static/css/main.7ebe1d0c.chunk.css.map",
-    "static/js/2.aa2ecd38.chunk.js.LICENSE.txt": "/my-website/static/js/2.aa2ecd38.chunk.js.LICENSE.txt",
-    "static/media/profile_pic.jpg": "/my-website/static/media/profile_pic.ca90ff2d.jpg"
+    "static/css/main.5103b37b.chunk.css.map": "/my-website/static/css/main.5103b37b.chunk.css.map",
+    "static/js/2.1fadc1cc.chunk.js.LICENSE.txt": "/my-website/static/js/2.1fadc1cc.chunk.js.LICENSE.txt",
+    "static/media/A copy.png": "/my-website/static/media/A copy.395e5c1c.png",
+    "static/media/coming-soon.png": "/my-website/static/media/coming-soon.ca7ad743.png",
+    "static/media/profile_pic.jpg": "/my-website/static/media/profile_pic.ca90ff2d.jpg",
+    "static/media/website.png": "/my-website/static/media/website.dae6eff3.png"
   },
   "entrypoints": [
     "static/js/runtime-main.0cbcd75a.js",
-    "static/js/2.aa2ecd38.chunk.js",
-    "static/css/main.7ebe1d0c.chunk.css",
-    "static/js/main.b2400340.chunk.js"
+    "static/js/2.1fadc1cc.chunk.js",
+    "static/css/main.5103b37b.chunk.css",
+    "static/js/main.c7258c2a.chunk.js"
   ]
 }
