@@ -17,9 +17,11 @@ import coming_soon from "./imgs/coming-soon.png";
 import fb from "./imgs/f.png";
 import github from "./imgs/github.png"
 import A from "./imgs/A copy.png"
+import config from "./config.json"
 var CanvasJSReact = require('./canvasjs.react');
 var CanvasJS = CanvasJSReact.default.CanvasJS;
 var CanvasJSChart = CanvasJSReact.default.CanvasJSChart;
+
 
 function MakeToast(props){
 	const [showA, setShowA] = useState(true);
@@ -52,7 +54,7 @@ class Contact extends Component{
 		super(props);
 		this.state = {postWork:null};
 	}
-	url = "https://hooks.slack.com/services/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";
+	url = config.slackhook;
 	email = (e) => {
 		e.preventDefault();
 		var from = "Message from " + this.refs.email.value + ":\n"
