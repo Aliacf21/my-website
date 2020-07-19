@@ -48,3 +48,13 @@ dt{
   padding-left: 2%;
   padding-right: 2%;
 }
+
+.icon{
+  width:70px;
+  height:70px;
+  margin-right:2%;
+}
+
+.icon:hover{
+  opacity: .7;
+}

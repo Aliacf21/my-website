@@ -1,22 +1,174 @@
-import React, {Component} from 'react';
+import React, {Component, useState} from 'react';
 import ReactDOM from 'react-dom';
-import { useWindowDimensions, Text } from 'react-native';
+import { useWindowDimensions, Text, ScrollView} from 'react-native';
 import Typist from "react-typist";
 import './index.css';
 import arrow from "./imgs/arrow.png";
 import prof_pic from "./imgs/profile_pic.jpg";
-import {Row, Col, Container, Image, Tabs, Tab, Button, Card, CardDeck, ListGroup} from "react-bootstrap";
+import {Row, Col, Container, Image, Tabs, Tab, Button, Card, CardDeck, ListGroup, Form, Toast} from "react-bootstrap";
 import { makeStyles } from '@material-ui/core/styles';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import website from "./imgs/website.png";
+import coming_soon from "./imgs/coming-soon.png";
+import fb from "./imgs/f.png";
+import github from "./imgs/github.png"
+import A from "./imgs/A copy.png"
 var CanvasJSReact = require('./canvasjs.react');
-
 var CanvasJS = CanvasJSReact.default.CanvasJS;
 var CanvasJSChart = CanvasJSReact.default.CanvasJSChart;
 
+function MakeToast(props){
+	const [showA, setShowA] = useState(true);
+	const toggleShowA = () => setShowA(!showA);
+	var message = "";
+	if (props.work == "Unsuccessful"){
+		message = "Oops, something went wrong. Please check your internet connection and try again later."
+	} else{
+		message = "Thanks so much for leaving feedback, your message has been sent (woohoo! I will follow up with a reply as soon as I can!"
+	}
+	
+	return (
+		<Toast style={{marginLeft:"20%", marginRight:"20%", maxWidth:"none"}} show={showA} onClose={toggleShowA}>
+			<Toast.Header>
+			<img
+				src={A}
+				style={{width:"3%"}}
+				className="rounded mr-2"
+				alt=""
+			/>
+			<strong className="mr-auto">Comment Bot</strong>
+			<small>{props.work}</small>
+			</Toast.Header>
+			<Toast.Body>{message}</Toast.Body>
+		</Toast>)
+}
+
+class Contact extends Component{
+	constructor(props){
+		super(props);
+		this.state = {postWork:null};
+	}
+	url = "https://hooks.slack.com/services/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";
+	email = (e) => {
+		e.preventDefault();
+		var from = "Message from " + this.refs.email.value + ":\n"
+		var message = this.refs.comment.value;
+		var formatted = '{"text":"' + from + message + '"}';
+		fetch(this.url, {
+			method: "POST",
+			body:formatted
+		}).then(response => {
+			if (!response.ok){
+				this.setState({postWork:"Unsuccessful"})
+			}else{
+				this.setState({postWork:"Successful"})
+			}});
+	}
+
+	renderContact = () => {
+		if (this.state.postWork == null){
+			return (<Card style={{marginLeft:"20%", marginRight:"20%"}}>
+				<Card.Body>
+				<Card.Title>Leave a Comment</Card.Title>
+					<Form onSubmit={this.email} id="comments">
+						<Form.Group>
+							<Form.Label>Email address</Form.Label>
+							<Form.Control ref="email" type="email" placeholder="name@example.com" />
+						</Form.Group>
+						<Form.Group>
+							<Form.Label>Message</Form.Label>
+							<Form.Control ref="comment" as="textarea" rows="3" placeholder="Wow AJ your website is so great!"/>
+						</Form.Group>
+						<Button variant="primary" type="submit">
+							Submit
+						</Button>
+					</Form>
+				</Card.Body>
+			</Card>)
+		}else{
+			return <MakeToast work={this.state.postWork}/>
+		}
+	}
+
+	render (){
+		return (
+			<div id="contact" style={{width:"100%", height:"100%", background:"#282828", }}>
+				<br/>
+				<div class="line">
+					<Text style={{textAlign:"center", width: "100%", display: "inline-block",
+					fontSize:"5vw", whiteSpace:"pre", color:"#f2f2f2"}}> Contact Me </Text>
+				</div>
+				<div style={{width:"100%", paddingBottom:"2%", marginLeft:"20%"}}>
+					<Text style={{fontSize:"2vw", color:"#f2f2f2", marginRight:"2%"}}>Find me on:</Text>
+					<a href="https://www.facebook.com/aj.druck/"><img class="icon" style={{borderRadius:"50%"}} src={fb}/></a>
+					<a href="https://github.com/djdrack"><img class="icon" src={github}/></a>
+				</div>
+				<div style={{paddingBottom:"7%"}}>
+					{this.renderContact()}
+				</div>
+				
+			</div>
+		)
+	}
+}
+
+function Tags(props){
+	var t = [];
+	props.tags.forEach(function (tag, _){
+		
+		t.push(<Button size="sm" >{tag}</Button>);
+		t.push(<Text style={{whiteSpace:"pre"}}> </Text>);
+	});
+	return (<div>{t}</div>)
+}
+
+class Projects extends Component{
+	render() {
+		return (
+			<div id="projects" style={{width:"100%", height:"100%", background:"#eae7dc", paddingBottom: "8%"}}>
+				<br/>
+				<div class="line">
+					<Text style={{textAlign:"center", width: "100%", display: "inline-block",
+					fontSize:"5vw", whiteSpace:"pre", color:"#00887A"}}> Personal Projects </Text>
+				</div>
+				<CardDeck class="card-deck cards">
+				<Card>
+					<Card.Header style={{fontSize:"1.3vw"}}><b>My personal website</b></Card.Header>
+					<Card.Img variant="top" src={website} />
+					<Card.Body>
+					<Card.Text>
+						This website an interactive personal resume built using React and React-Bootstrap. This project is a fun way to show my skills and also learn a valuable skill in the processs!
+					</Card.Text>
+					</Card.Body>
+					<Card.Footer>
+						<ScrollView horizontal={true} bounce={true}>
+							<small className="text-muted" class="tag">
+								<Tags tags={["React", "JavaScript", "Bootstrap", "NPM"]} />
+							</small>
+						</ScrollView>
+					</Card.Footer>
+				</Card>
+				<Card>
+					<Card.Header style={{fontSize:"1.3vw"}}><b>Coming Soon!</b></Card.Header>
+					<Card.Img variant="top" src={coming_soon} style={{height:"190px"}}/>
+					<Card.Body>
+					<Card.Text>
+						I haven't made any other projets yet but I always have some ideas on the backburner.
+					</Card.Text>
+					</Card.Body>
+					<Card.Footer>
+					<small className="text-muted">Nothing, <i>yet...</i></small>
+					</Card.Footer>
+				</Card>
+			</CardDeck>
+			</div>
+		)
+	}
+}
 
 class Skills extends Component{
 	render() {
@@ -28,7 +180,7 @@ class Skills extends Component{
 				reversed: true,
 			},
 			axisY: {
-				title: "Comfortability (%)",
+				title: "Proficiency (%)",
 				labelFormatter: this.addSymbols,
 				maximum: 100,
 				interval: 10
@@ -54,7 +206,7 @@ class Skills extends Component{
 				reversed: true,
 			},
 			axisY: {
-				title: "Comfortability (%)",
+				title: "Proficiency (%)",
 				maximum: 100,
 				interval: 10
 			},
@@ -62,6 +214,8 @@ class Skills extends Component{
 				type: "bar",
 				dataPoints: [
 					{ y: 80, label: "Microsoft Office"},
+					{ y: 70, label: "Numpy"},
+					{ y: 70, label: "Pandas"},
 					{ y: 60, label: "Flask" },
 					{ y:  55, label: "HTML/CSS" },
 					{ y:  55, label: "React" },
@@ -78,7 +232,7 @@ class Skills extends Component{
 				reversed: true,
 			},
 			axisY: {
-				title: "Comfortability (%)",
+				title: "Proficiency (%)",
 				maximum: 100,
 				interval: 10
 			},
@@ -92,7 +246,8 @@ class Skills extends Component{
 			}]
 		}
 		return (
-		<div id="Skills" style={{width:"100%", height:"100%", background:"#f2f2f2"}}>
+		<div id="Skills" style={{width:"100%", height:"100%", background:"#f2f2f2",
+								paddingBottom:"5%"}}>
 			<br/>
 			<div class="line">
 				<Text style={{textAlign:"center", width: "100%", display: "inline-block",
@@ -224,17 +379,6 @@ function Experiences() {
 ― Linus Torvalds </small>
 					</Card.Footer>
 				</Card>
-				{/*<Card>
-					<Card.Body>
-					<Card.Title>Research Experience</Card.Title>
-					<Card.Text>
-						<Acc d={d3} />
-					</Card.Text>
-					</Card.Body>
-					<Card.Footer>
-					<small className="text-muted">"All I'm armed with is research." ― Mike Wallace </small>
-					</Card.Footer>
-				</Card>*/}
 			</CardDeck>
 			<Card style={{display: "table", marginLeft: "20%", marginRight:"20%", marginTop: "2%"}}>
 				<Card.Body>
@@ -337,24 +481,26 @@ class Resume extends Component{
 	}
 }
 
+
 function HomeScreen() {
 	let w = useWindowDimensions();
 	let styles = {width:w.width, height:w.height, backgroundColor:'#77a6f7',};
 	const handleImageClick = () => {
 		document.getElementById("profile").scrollIntoView({ behavior: "smooth" });
-	  };
+	  };	
+
+
 
 	return(
 		<div style={styles}>
 			<Resume/>
-			<Typist avgTypingDelay={250} cursor={{show:false}}>
+			<Typist avgTypingDelay={250} cursor={{show:false}} id="typing">
 				<span style={{fontSize:"9vw", borderBottom:"1px solid black", 
-							
-							whiteSpace:"pre", position: 'absolute', left: '50%', 
-							top: '35%', transform: 'translate(-50%, -50%)',
-							color: '#f2f2f2'
-							}}> AJ Druck </span>
-			</Typist>
+					whiteSpace:"pre", position: 'absolute', left: '50%', 
+					top: '35%', transform: 'translate(-50%, -50%)',
+					color: '#f2f2f2'
+					}}> AJ Druck </span>
+				</Typist>
 
 			<div style={{position: 'absolute', bottom:"0%", left: "87%",
 						 backgroundColor:"black", width:"8%", height:"15%",
@@ -375,6 +521,8 @@ class App extends Component{
 			<Profile />
 			<Experiences />
 			<Skills />
+			<Projects />
+			<Contact />
 		</div>)
 	}
 
