@@ -57,7 +57,7 @@ class Contact extends Component{
 	}
 	
 	email = (e) => {
-		var bytes = CryptoJS.AES.decrypt("U2FsdGVkX19xjwN83thdsxC7+TiXm98nlAP5QGgZ7VZfeAyE5ZLt2VsNvt30+nDI+zO9FEh4ANfq8WgFARu+6K9SqideoaB9FLYMdf1a1KAsOWn9fZPSzRmOS7Q0EF2avP5GE2Bf/FSNDuQzcacdmg==", config.password)
+		var bytes = CryptoJS.AES.decrypt("U2FsdGVkX19OZIUjD4DkKDkl9WBmECb9yBE2PmWzKoAPSSxCK4s9S/43n9TuFgnzAQQIgtbSETp9rEebYCtFdAJfQU1kqHSjPCJK4AkjT7sdZlGWLGTQ++VCCj4LWCzkcrndIjA8Cb2nAafBez/tjA==", config.password)
 		var url = bytes.toString(CryptoJS.enc.Utf8);
 
 		e.preventDefault();
