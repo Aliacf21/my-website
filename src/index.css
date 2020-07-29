@@ -58,3 +58,12 @@ dt{
 .icon:hover{
   opacity: .7;
 }
+
+.App-navigation-item--active {
+  font-weight: 700;
+}
+.App-navigation-item {
+  padding: 0 1rem;
+  color: #fff;
+  font-size: 1.2rem;
+}

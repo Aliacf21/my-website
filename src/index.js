@@ -1,4 +1,4 @@
-import React, {Component, useState} from 'react';
+import React, {Component, useState, useRef} from 'react';
 import ReactDOM from 'react-dom';
 import { useWindowDimensions, Text, ScrollView} from 'react-native';
 import Typist from "react-typist";
@@ -18,6 +18,7 @@ import fb from "./imgs/f.png";
 import github from "./imgs/github.png"
 import A from "./imgs/A copy.png"
 import config from "./config.json"
+import useScrollSpy from 'react-use-scrollspy';
 var CryptoJS = require("crypto-js");
 var CanvasJSReact = require('./canvasjs.react');
 var CanvasJS = CanvasJSReact.default.CanvasJS;
@@ -94,6 +95,7 @@ class Contact extends Component{
 						</Button>
 					</Form>
 				</Card.Body>
+				<Card.Footer> Inspiration for the design of this website was taken from <a href="http://www.pascalvangemert.nl/"> here.</a></Card.Footer>
 			</Card>)
 		}else{
 			return <MakeToast work={this.state.postWork}/>
@@ -360,32 +362,31 @@ function Experiences() {
 					fontSize:"5vw", whiteSpace:"pre", color:"#00887A"}}> Experiences </Text>
 			</div>
 			<div style={{marginBottom: "2%"}}>
-			<CardDeck class="card-deck cards">
-				<Card>
-					<Card.Body>
-					<Card.Title>Leadership Experience</Card.Title>
-					<Card.Text>
-						<Acc d={d1}/>
-					</Card.Text>
-					</Card.Body>
-					<Card.Footer>
-					<small className="text-muted">"It’s only after you’ve stepped outside your comfort zone that you begin to change, grow, and transform."
+			
+			<Card style={{display: "table", marginLeft: "20%", marginRight:"20%", marginTop: "2%"}}>
+				<Card.Body>
+				<Card.Title>Leadership Experience</Card.Title>
+				<Card.Text>
+					<Acc d={d1}/>
+				</Card.Text>
+				</Card.Body>
+				<Card.Footer>
+				<small className="text-muted">"It’s only after you’ve stepped outside your comfort zone that you begin to change, grow, and transform."
 ― Roy T. Bennett</small>
-					</Card.Footer>
-				</Card>
-				<Card>
-					<Card.Body>
-					<Card.Title>Developer and Coding Experience</Card.Title>
-					<Card.Text>
-						<Acc d={d2}/>
-					</Card.Text>
-					</Card.Body>
-					<Card.Footer>
-					<small className="text-muted">"Talk is cheap. Show me the code."
+				</Card.Footer>
+			</Card>
+			<Card style={{display: "table", marginLeft: "20%", marginRight:"20%", marginTop: "2%"}}>
+				<Card.Body>
+				<Card.Title>Developer and Coding Experience</Card.Title>
+				<Card.Text>
+					<Acc d={d2}/>
+				</Card.Text>
+				</Card.Body>
+				<Card.Footer>
+				<small className="text-muted">"Talk is cheap. Show me the code."
 ― Linus Torvalds </small>
-					</Card.Footer>
-				</Card>
-			</CardDeck>
+				</Card.Footer>
+			</Card>
 			<Card style={{display: "table", marginLeft: "20%", marginRight:"20%", marginTop: "2%"}}>
 				<Card.Body>
 				<Card.Title>Research Experience</Card.Title>
@@ -426,7 +427,6 @@ function Experiences() {
 		</div>
 		)
 }
-
 
 class Profile extends Component{
 	paragraph1 = "My name is AJ Druck and I am a rising senior at Carnegie Mellon University. I am majoring in math with a concentration on operations research and statistics, I also have a minor in computer science. I am very interested in all things relating to big data and machine learning. In my free time I like to read, take walks, and watch TV/movies.";
@@ -474,14 +474,13 @@ class Profile extends Component{
 				</Row>
 			</Container>
 		</div>
-		
 	)}
 }
 
 class Resume extends Component{
 	render (){
 		return (
-			<Button style={{position:'absolute', left:"5%", top:"5%"}} variant="light" >
+			<Button style={{position:'absolute', right:"5%", top:"5%"}} variant="light" >
 				<a href="./Resume.pdf" download style={{textDecoration:"none", color:"inherit"}}> Resume</a>
 			</Button>)
 	}
@@ -498,7 +497,7 @@ function HomeScreen() {
 
 
 	return(
-		<div style={styles}>
+		<div style={styles} id="home">
 			<Resume/>
 			<Typist avgTypingDelay={250} cursor={{show:false}} id="typing">
 				<span style={{fontSize:"9vw", borderBottom:"1px solid black", 
@@ -508,7 +507,7 @@ function HomeScreen() {
 					}}> AJ Druck </span>
 				</Typist>
 
-			<div style={{position: 'absolute', bottom:"0%", left: "87%",
+			<div style={{cursor:"pointer", position: 'absolute', bottom:"0%", left: "87%",
 						 backgroundColor:"black", width:"8%", height:"15%",
 						 display:"flex", justifyContent:"center"}}
 						 onClick={handleImageClick}>
@@ -519,20 +518,61 @@ function HomeScreen() {
 		</div>);
 }
 
-class App extends Component{
-	render () {
-		return (
-		<div>
-			<HomeScreen />
-			<Profile />
-			<Experiences />
-			<Skills />
-			<Projects />
-			<Contact />
-		</div>)
+function scrollTo(event){
+	var name = event.target.innerHTML;
+	if (name != "Skills"){
+		name = name[0].toLowerCase() + name.slice(1)
 	}
+	document.getElementById(name).scrollIntoView({'behavior':"smooth"})
+}
 
+function App(){
+	const sectionRefs = [
+		useRef(null),
+		useRef(null),
+		useRef(null),
+		useRef(null),
+		useRef(null),
+		useRef(null),
+	  ];
+	
+	const activeSection = useScrollSpy({
+		sectionElementRefs: sectionRefs,
+		offsetPx: -80,
+	  });
+	
 
+	return (
+		<div>
+			<div>
+			<nav style={{cursor: "pointer", lineHeight:'20px', textAlign:'center', position:'fixed', top:"15%", left:"3%"}} className="App-navigation">
+				<div onClick={scrollTo} style={{paddingTop:"7%", fontSize:"14px", left: "20%", width:"110px", height:"80px", background:"black"}} className={activeSection === 0 ? "App-navigation-item App-navigation-item--active" : "App-navigation-item"}>Home</div>
+				<div onClick={scrollTo} style={{fontSize:"15px",left: "20%", width:"110px", height:"80px", background:"black"}} className={activeSection === 1 ? "App-navigation-item App-navigation-item--active" : "App-navigation-item"}>Profile</div>
+				<div onClick={scrollTo} style={{fontSize:"15px",left: "20%", width:"110px", height:"80px", background:"black"}} className={activeSection === 2 ? "App-navigation-item App-navigation-item--active" : "App-navigation-item"}>Experiences</div>
+				<div onClick={scrollTo} style={{fontSize:"15px",left: "20%", width:"110px", height:"80px", background:"black"}} className={activeSection === 3 ? "App-navigation-item App-navigation-item--active" : "App-navigation-item"}>Skills</div>
+				<div onClick={scrollTo} style={{fontSize:"15px",left: "20%", width:"110px", height:"80px", background:"black"}} className={activeSection === 4 ? "App-navigation-item App-navigation-item--active" : "App-navigation-item"}>Projects</div>
+				<div onClick={scrollTo} style={{paddingBottom:"7%", fontSize:"14px",left: "20%", width:"110px", background:"black"}} className={activeSection === 5 ? "App-navigation-item App-navigation-item--active" : "App-navigation-item"}>Contact</div>
+			</nav>
+			</div>
+			<section className="App-section" ref={sectionRefs[0]}>
+				<HomeScreen />
+				</section>
+			<section className="App-section" ref={sectionRefs[1]}>
+				<Profile />
+			</section>
+			<section className="App-section" ref={sectionRefs[2]}>
+				<Experiences />
+			</section>
+			<section className="App-section" ref={sectionRefs[3]}>
+				<Skills />
+			</section>
+			<section className="App-section" ref={sectionRefs[4]}>
+				<Projects />
+			</section>
+			<section className="App-section" ref={sectionRefs[5]}>
+				<Contact />
+			</section>
+		</div>)
 }
 
 ReactDOM.render(
