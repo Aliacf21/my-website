@@ -17,6 +17,7 @@ import coming_soon from "./imgs/coming-soon.png";
 import fb from "./imgs/f.png";
 import github from "./imgs/github.png"
 import A from "./imgs/A copy.png"
+import linkedIn from "./imgs/LI.png"
 import config from "./config.json"
 import useScrollSpy from 'react-use-scrollspy';
 var CryptoJS = require("crypto-js");
@@ -121,8 +122,9 @@ class Contact extends Component{
 				</div>
 				<div style={{width:"100%", paddingBottom:"2%", marginLeft:"20%"}}>
 					<Text style={{fontSize:"2vw", color:"#f2f2f2", marginRight:"2%"}}>Find me on:</Text>
-					<a href="https://www.facebook.com/aj.druck/"><img class="icon" style={{borderRadius:"50%"}} src={fb}/></a>
-					<a href="https://github.com/djdrack"><img class="icon" src={github}/></a>
+					<a target="_blank" href="https://www.facebook.com/aj.druck/"><img class="icon" style={{borderRadius:"50%"}} src={fb}/></a>
+					<a target="_blank" href="https://github.com/djdrack"><img class="icon" src={github}/></a>
+					<a target="_blank" href="https://www.linkedin.com/in/aj-druck-80b7021b4/"><img class="icon" src={linkedIn}/></a>
 				</div>
 				<div style={{paddingBottom:"7%"}}>
 					{this.renderContact()}
@@ -338,25 +340,40 @@ function Acc(props){
 
 function Experiences() {
 	var d1 = {"Lead TA for 15-112: Fundamentals of Programming": 
-	["I dealt with grading issues including rubrics and regrade requests.", 
+	["Summer 2019",
+	"I dealt with grading issues including rubrics and regrade requests.", 
 	"I made sure course events were staffed and ran smoothly.",
 	"I oversaw a staff of 15 people and held weekly course meetings."],
 	"Orientation Counselor": 
-	["I eased the college transition for incoming students, making sure they felt comfortable.",
+	["Summer 2019",
+	"I eased the college transition for incoming students, making sure they felt comfortable.",
 	"I was available for all incoming freshman and completed training to handle any questions (even those related to difficult topics such as sex and alcohol).",
 	"I facilitated many icebreakers and helped form bonds between the first years."]};
 
-	var d2 = {"Full Stack Developer for ExamOptimum":
-			["I helped optimize scheduling by reducing exam date conflicts based on student enrollment.",
+	var d2 = {
+		"Teaching Assistant for 15-281: Artificial Intelligence, Problem Solving and Representation":
+		["Fall 2020",
+		"I hold weekly recitations and office hours to help students understand concepts and clear up homework confusions.",
+		"I grade homework and exams."],
+		"Application Developer Intern at Morgan Stanley":
+		["Summer 2020",
+		"I worked with various machine learning models and techniques for sentence similarity such as Word2Vec and TF-IDF.",
+		"I scraped text from the web to gather more training data.",
+		"I integrated the models into a conversational chatbot on Skype for business to help with problem resolution."],
+		"Full Stack Developer for ExamOptimum":
+			["Summer 2019 - Present",
+			"I helped optimize scheduling by reducing exam date conflicts based on student enrollment.",
 			"This application is developed in Python using a Flask framework and SQL-Lite to communicate with servers.",
 			"This application is widely used within the Mellon College of Science and is expanding its user base."],
 			"Teaching Assistant for 15-112: Fundamentals of Programming":
-			["I was a competitively chosen TA for an introductory coding class taught in Python.",
+			["Fall 2018, Spring 2019, Summer 2019, Fall 2019, Summer 2020",
+			"I was a competitively chosen TA for an introductory coding class taught in Python.",
 			"Responsibilities included teaching a weekly recitation of ~31 students, two one-hour review sessions a week, and weekly office hours.",
 			"It was my duty to monitor struggling students and reach out to them for extra help if needed."]}
 
 	var d3 = {"Computer Human Interaction: Mobile Privacy Security Lab — Dr. Jason Hong (CMU)":
-			["I tested various machine learning models for the purpose of image captioning.",
+			["Spring 2020, Fall 2020",
+			"I tested various machine learning models for the purpose of image captioning.",
 			"I ran a user study on Amazon MTurk to find common errors in captioning and analyzed and parsed the resulting data.",
 			"I integrated the results into an online platform to enable researchers to identify common model mistakes."],
 			'Intersection Between Estimation and Optimization" ― Dr. G\u00E9rard Cornu\u00E9jols (CMU)':
